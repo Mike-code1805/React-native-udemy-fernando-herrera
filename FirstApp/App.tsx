@@ -1,9 +1,12 @@
+import {SafeAreaView} from 'react-native';
 import {CounterScreen} from './src/screens';
 
 const App = () => {
   return (
-    // <HiWorldScreen />
-    <CounterScreen />
+    <SafeAreaView>
+      {/* <HiWorldScreen /> */}
+      <CounterScreen />
+    </SafeAreaView>
   );
 };
 
