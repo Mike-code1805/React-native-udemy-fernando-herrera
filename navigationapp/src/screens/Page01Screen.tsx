@@ -1,10 +1,8 @@
-import React, {useEffect} from 'react';
+import {useEffect} from 'react';
 import {Button, Text, View, TouchableOpacity} from 'react-native';
-// import { StackScreenProps } from '@react-navigation/stack'
 import {DrawerScreenProps} from '@react-navigation/drawer';
 import {styles} from '../theme/appTheme';
 
-// interface Props extends StackScreenProps<any, any>{};
 interface Props extends DrawerScreenProps<any, any> {}
 
 export const Page01Screen = ({navigation}: Props) => {
