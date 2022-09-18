@@ -34,11 +34,13 @@ export const styles = StyleSheet.create({
   menuContainer: {
     marginVertical: 30,
     marginHorizontal: 50,
+    
   },
   menuBoton: {
     marginVertical: 10,
   },
   menuTexto: {
     fontSize: 20,
+    color: 'black',
   },
 });
