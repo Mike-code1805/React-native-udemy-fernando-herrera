@@ -1,5 +1,6 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
+import { useEffect } from 'react';
 import {
   Page01Screen,
   Page02Screen,
@@ -17,6 +18,9 @@ export type RootStackParams = {
 const Stack = createStackNavigator<RootStackParams>();
 
 export const StackNavigator = () => {
+  useEffect(() => {
+    console.log('StackNavigator');
+  }, []);
   return (
     <Stack.Navigator
       screenOptions={{
