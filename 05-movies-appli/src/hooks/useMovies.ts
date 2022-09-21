@@ -1,32 +1,54 @@
-import axios from 'axios';
 import {useEffect, useState} from 'react';
-import {Movie, MovieDB} from '../interfaces/movieInterfaces';
+import movieDB from '../api/movieDB';
+import {MovieDB, Movie} from '../interfaces/movieInterfaces';
 
-const movieDB = axios.create({
-  baseURL: 'https://api.themoviedb.org/3/movie',
-  params: {
-    api_key: '977dc91d3ca00156a8216522c3779855',
-  },
-});
+interface MoviesState {
+  nowPlaying: Movie[];
+  popular: Movie[];
+  topRated: Movie[];
+  upcoming: Movie[];
+}
 
 export const useMovies = () => {
-  const [isLoading, setIsLoading] = useState<Boolean>(true);
-  const [nowPlaying, setNowPlaying] = useState<Movie[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [moviesState, setMoviesState] = useState<MoviesState>({
+    nowPlaying: [],
+    popular: [],
+    topRated: [],
+    upcoming: [],
+  });
 
   const getMovies = async () => {
-    const nowPlayingPromise = await movieDB.get<MovieDB>('/now_playing');
+    const nowPlayingPromise =
+      movieDB.get<MovieDB>('/now_playing');
+    const popularPromise = movieDB.get<MovieDB>('/popular');
+    const topRatedPromise = movieDB.get<MovieDB>('/top_rated');
+    const upcomingPromise = movieDB.get<MovieDB>('/upcoming');
 
-    setNowPlaying(nowPlayingPromise.data.results);
+    const resps = await Promise.all([
+      nowPlayingPromise,
+      popularPromise,
+      topRatedPromise,
+      upcomingPromise,
+    ]);
+
+    setMoviesState({
+      nowPlaying: resps[0].data.results,
+      popular: resps[1].data.results,
+      topRated: resps[2].data.results,
+      upcoming: resps[3].data.results,
+    });
 
     setIsLoading(false);
   };
 
   useEffect(() => {
+    // now_playing
     getMovies();
   }, []);
 
   return {
-    nowPlaying,
+    ...moviesState,
     isLoading,
   };
 };
