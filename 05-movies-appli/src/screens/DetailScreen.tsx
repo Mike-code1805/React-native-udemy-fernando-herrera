@@ -55,8 +55,6 @@ export const DetailScreen = ({route, navigation}: Props) => {
 
 const styles = StyleSheet.create({
   imageContainer: {
-    // backgroundColor: 'red',
-    // overflow: 'hidden',
     width: '100%',
     height: screenHeight * 0.7,
     shadowColor: '#000',
